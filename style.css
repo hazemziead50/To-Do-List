@@ -57,7 +57,7 @@ body {
       margin-left: 8px;
     }
     .task .delete-btn {
-      background: #888;
+      background: #f00404;
       color: #fff;
       border: none;
       padding: 4px 8px;

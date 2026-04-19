@@ -37,11 +37,12 @@ taskContainer.addEventListener('click', e => {
 //use event delegation to handle checkbox change event
 taskContainer.addEventListener('change', e => {
     if (e.target.type === 'checkbox') {
-        
         let taskList = e.target.parentElement
         let li = taskList.querySelector('li');
         if (e.target.checked){
         li.style.textDecoration = 'line-through'
-        }
-    }
+        }else {
+        li.style.textDecoration = 'none'
+        }   
+    } 
 })
