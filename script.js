@@ -1,72 +1,10 @@
+import {Task} from "./modules/task.js"
+import {TaskList} from "./modules/tasklist.js"
+import {Storage} from "./modules/storage.js"
+
 let addButton = document.getElementById('add-btn');
 let taskInput = document.getElementById('taskInput');  
 let taskContainer = document.querySelector('.todo-container'); 
-
-    class Task{
-        constructor({id,taskText,isChecked}){
-            this.id = id;
-            this.taskText = taskText;
-            this.isChecked = isChecked;
-        }
-        create(){
-        let taskDiv = document.createElement('div')
-        taskDiv.setAttribute('id',this.id)
-        let inputCheckBox = document.createElement('input');
-        let deleteBtn = document.createElement('button');
-        let li = document.createElement('li');
-        taskDiv.classList.add('task')
-        inputCheckBox.type = "checkbox"
-        inputCheckBox.checked = this.isChecked
-        if(this.isChecked) {
-            li.style.textDecoration = 'line-through'
-        }
-        li.textContent = this.taskText;
-        deleteBtn.textContent = 'Delete';
-        deleteBtn.classList.add('delete-btn')
-        deleteBtn.dataset.id = this.id
-        taskDiv.append(li,inputCheckBox,deleteBtn)
-        return taskDiv
-        }
-    }
-    class TaskList{
-        #container
-        constructor(selector){
-            this.#container = document.querySelector(selector)
-        }
-        append(...taskElement){
-            this.#container.append(...taskElement)
-        }
-
-    }
-    class Storage{
-        #key
-        constructor(key){
-            this.#key = key
-        }
-        getList(){
-            return JSON.parse(localStorage.getItem(this.#key)) || []
-        }
-        save(item){
-            const parsed = JSON.parse(localStorage.getItem(this.#key)) || []
-            parsed.push(item)
-            localStorage.setItem(this.#key,JSON.stringify(parsed))
-        }
-        updateTaskStatus(taskID,isChecked){
-            const list = storage.getList()
-            const newList = list.map(task => {
-                if(task.id == taskID){
-                    task.isChecked = isChecked
-                } 
-                return task
-            })
-            localStorage.setItem('tasks',JSON.stringify(newList))
-        }
-        upDateDelete(taskId){
-            const parsed = storage.getList()
-            const newList = parsed.filter(task => task.id != taskId)
-            localStorage.setItem('tasks',JSON.stringify(newList))
-        }
-    }
 
     const taskList = new TaskList('.todo-container')
     const storage = new Storage('tasks')
@@ -116,8 +54,6 @@ let taskContainer = document.querySelector('.todo-container');
                 li.style.textDecoration = 'none'
                 storage.updateTaskStatus(taskId, false)
             }
-        
-            
         }
     })
 
