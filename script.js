@@ -101,8 +101,6 @@ let taskContainer = document.querySelector('.todo-container');
             const taskId = e.target.getAttribute('data-id')
             const taskElement = document.getElementById(taskId)
             taskElement.remove()
-            console.log(taskId);
-            
             storage.upDateDelete(taskId)
         }
     })
